@@ -1,21 +1,24 @@
 import { useState } from "react";
 
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { decrementAction, setCounterAction } from "./actions";
 
-function Foo(props) {
+function Foo() {
   const [input, setInput] = useState('');
+  const counter = useSelector((state) => state.counter.count);
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.set(input);
+    dispatch(setCounterAction(input));
+    setInput('');
   }
 
   return (
     <div>
       Foo<br/>
-      counter: {props.count}
-      <button onClick={() => { props.decrement() }}>decrement</button>
+      counter: {counter}
+      <button onClick={() => { dispatch(decrementAction) }}>decrement</button>
       <form onSubmit={handleSubmit}>
         <input type="number" value={input} onChange={(e) => setInput(e.target.value)}/>
         <button type="submit">set</button>
@@ -24,13 +27,6 @@ function Foo(props) {
   )
 }
 
-const mapStateToProps = (state) => ({
-  count: state.count
-});
 
-const mapDispatchToProps = (dispatch, state) => ({
-  decrement: () => { dispatch(decrementAction) },
-  set: (num) => { dispatch(setCounterAction(num)) }
-});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Foo);
+export default Foo;

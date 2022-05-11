@@ -1,24 +1,21 @@
 
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { incrementAction } from "./actions";
 import Foo from "./Foo";
+import Todo from "./Todo";
 
-function App(props) {
+function App() {
+  const counter = useSelector((state) => state.counter.count);
+  const dispatch = useDispatch();
+
   return (
     <div className="App">
-      counter: {props.count}
-      <button onClick={() => { props.incrementCount() }}>increment</button>
-      <Foo />
+      {/* counter: {counter}
+      <button onClick={() => { dispatch(incrementAction) }}>increment</button>
+      <Foo /> */}
+      <Todo />
     </div>
   );
 }
 
-const mapStateToProps = (state) => ({
-  count: state.count
-});
-
-const mapDispatchToProps = (dispatch, state) => ({
-  incrementCount: () => { dispatch(incrementAction) }
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
