@@ -2,6 +2,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { incrementAction } from "./actions";
 import Foo from "./Foo";
+import Post from "./Post";
 import Todo from "./Todo";
 
 function App() {
@@ -13,7 +14,8 @@ function App() {
       {/* counter: {counter}
       <button onClick={() => { dispatch(incrementAction) }}>increment</button>
       <Foo /> */}
-      <Todo />
+      {/* <Todo /> */}
+      <Post />
     </div>
   );
 }
